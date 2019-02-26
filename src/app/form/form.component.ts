@@ -1,17 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {Component} from '@angular/core';
+import {Hero} from '../hero';
 
 @Component({
     selector: 'app-form',
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent {
+    model = new Hero('', '');
 
     constructor() {
     }
 
-    ngOnInit() {
+    onSubmit() {
+        console.log(this.model.username, this.model.name);
     }
+
 }
 
