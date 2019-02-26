@@ -1,0 +1,56 @@
+@charset "utf-8";
+html{
+  font-size:100px;
+}
+body{font-size:.14rem;}
+
+@media (min-width: 320px) {
+  html{
+    font-size:85.3333px;
+  }
+  body{font-size:.13rem;}
+}
+
+@media (min-width: 375px) {
+  html{
+    font-size:100px;
+  }
+  body{font-size:.14rem;}
+}
+
+@media (min-width: 414px) {
+  html{
+    font-size:110.4px;
+  }
+  body{font-size:.15rem;}
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1200px;
+  }
+}
+
+
+// @import "responsiveness"; // 禁止响应式
+
+@for $i from 1 through 30 {
+  .ml-#{$i*5} {margin-left:$i*5/100+rem;}
+  .mr-#{$i*5} {margin-right:$i*5/100+rem;}
+  .mt-#{$i*5} {margin-top:$i*5/100+rem;}
+  .mb-#{$i*5} {margin-bottom:$i*5/100+rem;}
+  .pl-#{$i*5} {padding-left:$i*5/100+rem;}
+  .pr-#{$i*5} {padding-right:$i*5/100+rem;}
+  .pt-#{$i*5} {padding-top:$i*5/100+rem;}
+  .pb-#{$i*5} {padding-bottom:$i*5/100+rem;}
+}
