@@ -2,12 +2,87 @@
     <form class="form-horizontal" autocomplete="off" (ngSubmit)="onSubmit()" #heroForm="ngForm">
         <div class="form-group">
             <label class="col-sm-2 control-label">用户名</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" name="username" id="username" required [(ngModel)]="model.username" #username="ngModel">
+            <div class="col-sm-10">
+                <input type="text" name="username" id="username" class="form-control" placeholder="请输入用户名" required [(ngModel)]="model.username" #username="ngModel" />
                 <div [hidden]="username.valid || username.untouched">
                     <p [hidden]="!heroForm.hasError('required','username')">用户名是必填的</p>
                     <p [hidden]="!heroForm.hasError('minlength','username')">用户名最小长度是6</p>
                 </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">邮箱地址</label>
+            <div class="col-sm-10">
+                <input type="text" name="email" class="form-control" placeholder="请输入邮箱地址" required [(ngModel)]="model.email" #email="ngModel" />
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <input type="password" name="password" class="form-control" value="" placeholder="请输入密码" [(ngModel)]="model.password" #password="ngModel" />
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label">确认密码</label>
+            <div class="col-sm-10">
+                <input type="password" name="password1" class="form-control"  placeholder="请输入确认密码" [(ngModel)]="model.password1" #password1="ngModel" />
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-10">
+                <label class="radio-inline" for="inlineRadio1">
+                    <input type="radio" name="gender" id="inlineRadio1" value="1" checked> 男
+                </label>
+                <label class="radio-inline" for="inlineRadio2">
+                    <input type="radio" name="gender" id="inlineRadio2" value="2"> 女
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">您的生日</label>
+            <div class="col-sm-10">
+                <input type="text" name="birthday" class="form-control"  placeholder="请输入您的的生日" [(ngModel)]="model.birthday" #birthday="ngModel" />
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label">语言</label>
+            <div class="col-sm-10">
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="languages[0]" form="inlineCheckbox1" id="inlineCheckbox1" value="1"> 英语
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="languages[1]" form="inlineCheckbox2" id="inlineCheckbox2" value="2"> 法语
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="languages[2]" form="inlineCheckbox3" id="inlineCheckbox3" value="3"> 德语
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="languages[3]" form="inlineCheckbox4" id="inlineCheckbox4" value="4"> 俄语
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="languages[4]" form="inlineCheckbox5" id="inlineCheckbox5" value="5"> 其他
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">地区</label>
+            <div class="col-sm-10">
+                <select class="form-control chosen" data-placeholder="请选择">
+                    <option value="">请选择</option>
+                </select>
+                <span class="Validform_checktip"></span>
             </div>
         </div>
         <div class="form-group">
@@ -18,5 +93,4 @@
         </div>
     </form>
 
-    {{model.username}}
 </div>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Hero} from '../hero';
 
@@ -7,8 +7,8 @@ import {Hero} from '../hero';
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.scss']
 })
-export class FormComponent {
-
+export class FormComponent implements OnInit {
+    model = new Hero('', '', '', '', '');
     private heroForm: FormGroup;
 
     mobileValidator(control: FormControl) {
@@ -27,8 +27,6 @@ export class FormComponent {
         return isEqule ? null : {equal: {info: '两次密码不一致'}};
     }
 
-    model = new Hero('');
-
     constructor(private fb: FormBuilder) {
         this.heroForm = this.fb.group({
             username: ['', [Validators.required, Validators.minLength(6)]],
@@ -42,6 +40,9 @@ export class FormComponent {
 
     onSubmit() {
         console.log(this.model.username);
+    }
+
+    ngOnInit() {
     }
 
 }

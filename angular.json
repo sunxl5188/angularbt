@@ -53,6 +53,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/swiper/dist/js/swiper.min.js",
+              "node_modules/angular-laydate/dist/ng-laydate.js",
               "src/assets/js/bootstrap.js"
             ],
             "es5BrowserSupport": true
