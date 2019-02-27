@@ -43,6 +43,9 @@ export class FormComponent implements OnInit {
     }
 
     ngOnInit() {
+        laydate.render({
+            elem: '#time'
+        })
     }
 
 }
