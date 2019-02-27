@@ -48,12 +48,14 @@
             "styles": [
               "node_modules/swiper/dist/css/swiper.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/layer/theme/default/layer.css",
               "src/assets/laydate/theme/default/laydate.css",
               "src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/swiper/dist/js/swiper.min.js",
+              "src/assets/layer/layer.js",
               "src/assets/laydate/laydate.js",
               "src/assets/bootstrap.js"
             ],
