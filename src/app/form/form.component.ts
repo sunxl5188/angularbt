@@ -51,11 +51,7 @@ export class FormComponent implements OnInit {
 
     buildForm() {
         this.myform = this.fb.group({
-            username: ['', [
-                Validators.required,
-                Validators.minLength(4),
-                Validators.maxLength(10)
-            ]],
+            username: [''],
             email: [''],
             password: [''],
             password1: [''],
