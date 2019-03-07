@@ -89,11 +89,13 @@ export class FormComponent implements OnInit {
 
     onValueChanged(data ?: any) {
         // 如果表单不存在则返回
-        if (!this.myform) return;
+        if (!this.myform) {
+            return;
+        }
         // 获取当前的表单
         const form = this.myform;
         // 遍历错误消息对象
-        for (const field in this.formErrors) {
+        for (const field of Object.keys(this.formErrors)) {
             // 清空当前的错误消息
             this.formErrors[field] = '';
             // 获取当前表单的控件
@@ -104,7 +106,7 @@ export class FormComponent implements OnInit {
                 // 获取验证不通过的控件名，为了获取更详细的不通过信息
                 const messages = this.validationMessage[field];
                 // 遍历当前控件的错误对象，获取到验证不通过的属性
-                for (const key in control.errors) {
+                for (const key of Object.keys(control.errors)) {
                     // 把所有验证不通过项的说明文字拼接成错误消息
                     this.formErrors[field] += messages[key] + '\n';
                 }
