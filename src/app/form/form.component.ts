@@ -27,28 +27,6 @@ export class FormComponent implements OnInit {
         }
     };
 
-    /*myform = new FormGroup({
-        username: new FormControl(''),
-        email: new FormControl(''),
-        password: new FormControl(''),
-        password1: new FormControl(''),
-        birthday: new FormControl(''),
-        gender: new FormControl(''),
-        languages: new FormGroup({
-            lang1: new FormControl(''),
-            lang2: new FormControl(''),
-            lang3: new FormControl(''),
-            lang4: new FormControl(''),
-            lang5: new FormControl('')
-        }),
-        address: new FormGroup({
-            prov: new FormControl(''),
-            city: new FormControl(''),
-            dist: new FormControl(''),
-            street: new FormControl('')
-        })
-    })*/
-
     buildForm() {
         this.myform = this.fb.group({
             username: [''],

@@ -8,6 +8,8 @@ import {HomeComponent} from './home/home.component';
 import {ListComponent} from './list/list.component';
 import {ErrorComponent} from './error/error.component';
 import {FormComponent} from './form/form.component';
+import { DetailComponent } from './detail/detail.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +17,9 @@ import {FormComponent} from './form/form.component';
         HomeComponent,
         ListComponent,
         ErrorComponent,
-        FormComponent
+        FormComponent,
+        DetailComponent,
+        UserComponent
     ],
     imports: [
         BrowserModule,
