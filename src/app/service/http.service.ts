@@ -1,24 +1,33 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+
+const httpOptions = {
+    headers: new HttpHeaders({
+        // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/json;charset=UTF-8'
+    })
+};
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpService {
-    private url = 'http://www.fj2h.com';
+    baseUrl = 'http://www.js.me/';
 
     constructor(
         private http: HttpClient
     ) {
     }
 
-    httpOptions = {
-        headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'})
-    };
+    // GET获取信息
+    getAllData(url: string, id: any): Observable<any> {
+        const params = new HttpParams().set('id', id);
+        return this.http.get(this.baseUrl + url, {params});
+    }
 
-    // 获取数据信息
-    getAllData(data): Observable<any> {
-        return this.http.get(this.url + '', data);
+    // POST 请求信息
+    postData(url: string, params: object): Observable<any> {
+        return this.http.post(this.baseUrl + url, params, httpOptions);
     }
 }

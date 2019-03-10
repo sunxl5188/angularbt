@@ -19,7 +19,7 @@ const routes: Routes = [
     {path: 'list', component: ListComponent},
     {path: 'detail', component: DetailComponent},
     {path: 'form', component: FormComponent},
-    {path: 'user', component: UserComponent, canActivate: [LoginGuard], canDeactivate: [UnsaveGuard], resolve:{
+    {path: 'user', component: UserComponent, canActivate: [LoginGuard], canDeactivate: [UnsaveGuard], resolve: {
         user: UserResolve
         }},
     {path: '**', component: ErrorComponent}
