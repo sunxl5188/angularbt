@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {HttpService} from '../service/http.service';
+import {HttpUtilsService} from '../HttpUtils.Service';
 
 
 @Component({
     selector: 'app-detail',
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
-    providers: [HttpService]
+    providers: [HttpUtilsService]
 })
 export class DetailComponent implements OnInit {
     id = null;
@@ -16,7 +16,7 @@ export class DetailComponent implements OnInit {
     constructor(
         private router: ActivatedRoute,
         private TitleServe: Title,
-        private ax: HttpService
+        private ax: HttpUtilsService
     ) {
         TitleServe.setTitle('信息详细页');
     }
@@ -31,12 +31,14 @@ export class DetailComponent implements OnInit {
     }
 
     getInfo(): void {
-        this.ax.postData('demo/data.php?action=all', {
-            id: 1,
-            name: 'abc',
-            sex: '1'
-        }).subscribe(res => {
-            console.log(res);
+        this.ax.Request({
+            method: 'GET',
+            url: 'demo/data.php?action=all',
+            data: {
+                id: 1,
+                name: '请求',
+                title: '标题'
+            }
         });
     }
 
