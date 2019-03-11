@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import {HttpClient} from '@angular/common/http';
 import {HttpUtilsService} from '../HttpUtils.Service';
+import {catchError, retry} from 'rxjs/operators';
 
 
 @Component({
@@ -10,10 +12,13 @@ import {HttpUtilsService} from '../HttpUtils.Service';
     styleUrls: ['./detail.component.scss'],
     providers: [HttpUtilsService]
 })
+
 export class DetailComponent implements OnInit {
     id = null;
+    configUrl = 'assets/test.json';
 
     constructor(
+        private http: HttpClient,
         private router: ActivatedRoute,
         private TitleServe: Title,
         private ax: HttpUtilsService
@@ -23,23 +28,30 @@ export class DetailComponent implements OnInit {
 
     ngOnInit() {
         this.id = this.router.snapshot.queryParams['id'];
-        this.getInfo();
-        /* this.http.getAllData({}).subscribe(data => {
-             console.log(data);
-         });*/
-        // this.http.getAllData() https://blog.csdn.net/weixin_41623959/article/details/82849470
+        this.getJson().subscribe(res => {
+            console.log(res);
+        });
     }
 
     getInfo(): void {
         this.ax.Request({
             method: 'GET',
             url: 'demo/data.php?action=all',
-            data: {
-                id: 1,
-                name: '请求',
-                title: '标题'
-            }
+            id: 1
+        }).subscribe(res => {
+            console.log(res.data.title);
         });
+    }
+
+    getJson() {
+        return this.http.get(this.configUrl)
+            .pipe(
+                retry(3),
+                catchError(res => {
+                    console.log(res);
+                    return res;
+                })
+            );
     }
 
 }
