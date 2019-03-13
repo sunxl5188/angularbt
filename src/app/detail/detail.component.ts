@@ -1,56 +1,40 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {HttpClient} from '@angular/common/http';
-import {HttpUtilsService} from '../HttpUtils.Service';
-import {catchError, retry} from 'rxjs/operators';
+import {Config, ConfigService} from './detail.service';
 
 
 @Component({
     selector: 'app-detail',
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
-    providers: [HttpUtilsService]
+    providers: [ConfigService]
 })
 
 export class DetailComponent implements OnInit {
     id = null;
-    configUrl = 'assets/test.json';
+    headers: string[];
+    config: Config;
+    error: any;
 
     constructor(
-        private http: HttpClient,
+        private configService: ConfigService,
         private router: ActivatedRoute,
-        private TitleServe: Title,
-        private ax: HttpUtilsService
+        private TitleServe: Title
     ) {
         TitleServe.setTitle('信息详细页');
     }
 
     ngOnInit() {
         this.id = this.router.snapshot.queryParams['id'];
-        this.getJson().subscribe(res => {
-            console.log(res);
-        });
+
     }
 
-    getInfo(): void {
-        this.ax.Request({
-            method: 'GET',
-            url: 'demo/data.php?action=all',
-            id: 1
-        }).subscribe(res => {
-            console.log(res.data.title);
-        });
-    }
-
-    getJson() {
-        return this.http.get(this.configUrl)
-            .pipe(
-                retry(3),
-                catchError(res => {
-                    console.log(res);
-                    return res;
-                })
+    showConfig() {
+        this.configService.getConfig()
+            .subscribe(
+                (data: Config) => this.config = {...data}, // success path
+                error => this.error = error // error path
             );
     }
 
