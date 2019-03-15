@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {Config, ConfigService} from './detail.service';
+import {Config, HttpUtilsService} from '../HttpUtils.Service';
 
 
 @Component({
     selector: 'app-detail',
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
-    providers: [ConfigService]
+    providers: [HttpUtilsService]
 })
 
 export class DetailComponent implements OnInit {
@@ -18,7 +18,7 @@ export class DetailComponent implements OnInit {
     error: any;
 
     constructor(
-        private configService: ConfigService,
+        private http: HttpUtilsService,
         private router: ActivatedRoute,
         private TitleServe: Title
     ) {
@@ -31,7 +31,7 @@ export class DetailComponent implements OnInit {
     }
 
     showConfig() {
-        this.configService.getConfig()
+        this.http.get('?action=all', this.id)
             .subscribe(
                 (data: Config) => this.config = {...data}, // success path
                 error => this.error = error // error path
@@ -39,7 +39,7 @@ export class DetailComponent implements OnInit {
     }
 
     showConfigResponse() {
-        this.configService.getConfigResponse()
+        /*this.configService.getConfigResponse()
             .subscribe(
                 resp => {
                     const keys = resp.headers.keys();
@@ -47,7 +47,7 @@ export class DetailComponent implements OnInit {
                     this.config = {...resp.body};
                 },
                 error => this.error = error
-            );
+            );*/
     }
 
 }

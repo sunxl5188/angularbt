@@ -1,33 +1,28 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError, retry} from 'rxjs/operators';
 
-const httpOptions = {
-    headers: new HttpHeaders({
-        // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-        'Content-Type': 'application/json;charset=UTF-8'
-    })
-};
+export interface Config {
+    title: string;
+    content: string;
+}
+
+const headers = new HttpHeaders({
+    // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    'Content-Type': 'application/json;charset=UTF-8',
+    'X-CustomToken': 'value+'
+});
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpUtilsService {
-    baseUrl = 'http://www.js.me/';
+    baseUrl = 'http://www.js.me/demo/data.php';
 
     constructor(
         private http: HttpClient
     ) {
-    }
-
-    // 统一发送请求
-    Request(params: any): Observable<any> {
-        if (params['method'].toLowerCase() === 'post') {
-            return this.get(params['url'], params['data']);
-        }
-        if (params['method'].toLowerCase() === 'get') {
-            return this.get(params['url'], params['id']);
-        }
     }
 
     /**
@@ -35,14 +30,38 @@ export class HttpUtilsService {
      * @param url 请求地址
      * @param id 只接收参数ID
      */
-    public get(url: string, id: string): Observable<any> {
+    public get(url: string, id: string): Observable<Config[]> {
         const params = new HttpParams()
             .set('id', id);
-        return this.http.get(this.baseUrl + url, {params});
+        return this.http.get<Config[]>(
+            this.baseUrl + url, {headers, params}
+        ).pipe(
+            retry(3), // 最多重试3次失败的请求
+            catchError(this.handleError) // 然后处理错误
+        );
     }
 
-    // POST 请求信息
-    post(url: string, params: object): Observable<any> {
-        return this.http.post(this.baseUrl + url, params, httpOptions);
+    public post(url: string, params: object): Observable<any> {
+        return this.http.post(this.baseUrl + url, params);
+    }
+
+    /**
+     * handleError 错误信息处理
+     * param error
+     */
+    private handleError(error: HttpErrorResponse) {
+        if (error.error instanceof ErrorEvent) {
+            // 发生客户端或网络错误。相应处理。
+            console.error('发生了一个错误:', error.error.message);
+        } else {
+            // 后端返回一个不成功的响应代码。
+            // 响应主体可能包含关于出错原因的线索，
+            console.error(
+                `后端返回代码 ${error.status}, ` +
+                `错误内容: ${error.error}`);
+        }
+        // return an observable with a user-facing error message
+        return throwError(
+            '访问出现问题，请稍后再试!');
     }
 }
