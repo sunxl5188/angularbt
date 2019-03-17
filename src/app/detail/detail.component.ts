@@ -13,7 +13,7 @@ import {Config, HttpUtilsService} from '../HttpUtils.Service';
 
 export class DetailComponent implements OnInit {
     id = null;
-    headers: string[];
+    headers: string;
     config: Config;
     error: any;
 
@@ -30,7 +30,7 @@ export class DetailComponent implements OnInit {
 
     }
 
-    showConfig() {
+    showGet() {
         this.http.get('?action=all', this.id)
             .subscribe(
                 (data: Config) => this.config = {...data}, // success path
@@ -38,7 +38,7 @@ export class DetailComponent implements OnInit {
             );
     }
 
-    showConfigResponse() {
+    showPost() {
         /*this.configService.getConfigResponse()
             .subscribe(
                 resp => {

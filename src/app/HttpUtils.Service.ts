@@ -30,10 +30,10 @@ export class HttpUtilsService {
      * @param url 请求地址
      * @param id 只接收参数ID
      */
-    public get(url: string, id: string): Observable<Config[]> {
+    public get(url: string, id: string): Observable<Config> {
         const params = new HttpParams()
             .set('id', id);
-        return this.http.get<Config[]>(
+        return this.http.get<Config>(
             this.baseUrl + url, {headers, params}
         ).pipe(
             retry(3), // 最多重试3次失败的请求
