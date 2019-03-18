@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 
 export interface Config {
     title: string;
     content: string;
+    types: number;
 }
 
 const headers = new HttpHeaders({
@@ -41,8 +42,11 @@ export class HttpUtilsService {
         );
     }
 
-    public post(url: string, params: object): Observable<any> {
-        return this.http.post(this.baseUrl + url, params);
+    public post(url, params): Observable<any> {
+        return this.http.post(this.baseUrl + url, params, {headers})
+            .pipe(
+                catchError(this.handleError)
+            );
     }
 
     /**

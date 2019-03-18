@@ -39,15 +39,15 @@ export class DetailComponent implements OnInit {
     }
 
     showPost() {
-        /*this.configService.getConfigResponse()
-            .subscribe(
-                resp => {
-                    const keys = resp.headers.keys();
-                    this.headers = keys.map(key => `${key}: ${resp.headers.get(key)}`);
-                    this.config = {...resp.body};
-                },
-                error => this.error = error
-            );*/
+        this.http.post('?action=all', {
+            title: '111',
+            content: '23ewrwr',
+            type: 2,
+            name: 'myform'
+        }).subscribe(
+            (data) => this.config = {...data},
+            error => this.error = error
+        );
     }
 
 }
