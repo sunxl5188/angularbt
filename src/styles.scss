@@ -1,47 +1,41 @@
 @charset "utf-8";
-html{
+html {
   font-size:100px;
 }
-body{font-size:.14rem;}
-
-@media (min-width: 320px) {
-  html{
+body {font-size:.14rem;}
+@media (min-width:320px) {
+  html {
     font-size:85.3333px;
   }
-  body{font-size:.13rem;}
+  body {font-size:.13rem;}
 }
-
-@media (min-width: 375px) {
-  html{
+@media (min-width:375px) {
+  html {
     font-size:100px;
   }
-  body{font-size:.14rem;}
+  body {font-size:.14rem;}
 }
-
-@media (min-width: 414px) {
-  html{
+@media (min-width:414px) {
+  html {
     font-size:110.4px;
   }
-  body{font-size:.15rem;}
+  body {font-size:.15rem;}
 }
-
-@media (min-width: 768px) {
+@media (min-width:768px) {
   .container {
-    width: 750px;
+    width:750px;
   }
 }
-@media (min-width: 992px) {
+@media (min-width:992px) {
   .container {
-    width: 970px;
+    width:970px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width:1200px) {
   .container {
-    width: 1200px;
+    width:1200px;
   }
 }
-
-
 // @import "responsiveness"; // 禁止响应式
 
 @for $i from 1 through 30 {
@@ -53,4 +47,13 @@ body{font-size:.14rem;}
   .pr-#{$i*5} {padding-right:$i*5/100+rem;}
   .pt-#{$i*5} {padding-top:$i*5/100+rem;}
   .pb-#{$i*5} {padding-bottom:$i*5/100+rem;}
+}
+.nav {
+  & > li > a {
+    &.active, &:hover{
+      color:#555 !important;
+      background-color:#e7e7e7 !important;
+    }
+  }
+
 }

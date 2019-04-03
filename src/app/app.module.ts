@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
@@ -11,6 +12,7 @@ import {ErrorComponent} from './error/error.component';
 import {FormComponent} from './form/form.component';
 import { DetailComponent } from './detail/detail.component';
 import { UserComponent } from './user/user.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -20,10 +22,12 @@ import { UserComponent } from './user/user.component';
         ErrorComponent,
         FormComponent,
         DetailComponent,
-        UserComponent
+        UserComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,

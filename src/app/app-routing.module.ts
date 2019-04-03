@@ -11,17 +11,21 @@ import {ListComponent} from './list/list.component';
 import {DetailComponent} from './detail/detail.component';
 import {FormComponent} from './form/form.component';
 import {UserComponent} from './user/user.component';
+import {LoginComponent} from './login/login.component';
 import {ErrorComponent} from './error/error.component';
 
 
 const routes: Routes = [
-    {path: '', component: HomeComponent, pathMatch: 'full'},
     {path: 'list', component: ListComponent},
     {path: 'detail', component: DetailComponent},
     {path: 'form', component: FormComponent},
-    {path: 'user', component: UserComponent, canActivate: [LoginGuard], canDeactivate: [UnsaveGuard], resolve: {
-        user: UserResolve
-        }},
+    {
+        path: 'user', component: UserComponent, canActivate: [LoginGuard], canDeactivate: [UnsaveGuard], resolve: {
+            user: UserResolve
+        }
+    },
+    {path: 'login', component: LoginComponent},
+    {path: '', component: HomeComponent, pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
 ];
 
@@ -34,4 +38,5 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
+
 // Angular路由——路由守卫 https://www.cnblogs.com/starof/p/9012193.html
