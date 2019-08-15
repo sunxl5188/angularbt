@@ -1,128 +1,20 @@
 <div class="container">
-    <form class="form-horizontal" autocomplete="off" [formGroup]="myform" (ngSubmit)="onSubmit()">
+    <form class="form-horizontal" autocomplete="off" [formGroup]="myForm">
         <div class="form-group">
             <label class="col-sm-2 control-label">用户名</label>
             <div class="col-sm-10">
-                <input type="text" name="username" #username class="form-control" placeholder="请输入用户名"
-                       formControlName="username" required minlength="4" maxlength="10" pattern="/[a-zA-Z]/" />
-
-            </div>
-        </div>
-        {{formErrors.username}}--
-
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">邮箱地址</label>
-            <div class="col-sm-10">
-                <input type="text" name="email" class="form-control" placeholder="请输入邮箱地址" formControlName="email"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">密码</label>
-            <div class="col-sm-10">
-                <input type="password" name="password" class="form-control" value="" placeholder="请输入密码"
-                       formControlName="password"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">确认密码</label>
-            <div class="col-sm-10">
-                <input type="password" name="password1" class="form-control" placeholder="请输入确认密码"
-                       formControlName="password1"/>
-                <span class="Validform_checktip"></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">性别</label>
-            <div class="col-sm-10">
-                <label class="radio-inline" for="inlineRadio1">
-                    <input type="radio" name="gender" id="inlineRadio1" value="1" checked formControlName="gender"> 男
-                </label>
-                <label class="radio-inline" for="inlineRadio2">
-                    <input type="radio" name="gender" id="inlineRadio2" value="2" formControlName="gender"> 女
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">您的生日</label>
-            <div class="col-sm-10">
-                <input type="text" id="time" name="birthday" class="form-control" placeholder="请输入您的的生日"
-                       formControlName="birthday"/>
-            </div>
-        </div>
-
-        <div class="form-group" formGroupName="languages">
-            <label class="col-sm-2 control-label">语言</label>
-            <div class="col-sm-10">
-                <label class="checkbox-inline" for="inlineCheckbox1">
-                    <input type="checkbox" id="inlineCheckbox1" value="1" formControlName="lang1" > 英语
-                </label>
-                <label class="checkbox-inline" for="inlineCheckbox2">
-                    <input type="checkbox" id="inlineCheckbox2" value="2" formControlName="lang2" > 法语
-                </label>
-                <label class="checkbox-inline" for="inlineCheckbox3">
-                    <input type="checkbox" id="inlineCheckbox3" value="3" formControlName="lang3" > 德语
-                </label>
-                <label class="checkbox-inline" for="inlineCheckbox4">
-                    <input type="checkbox" id="inlineCheckbox4" value="4" formControlName="lang4" > 俄语
-                </label>
-                <label class="checkbox-inline" for="inlineCheckbox5">
-                    <input type="checkbox" id="inlineCheckbox5" value="5" formControlName="lang5" > 其他
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group" formGroupName="address">
-            <label class="col-sm-2 control-label">地区</label>
-            <div class="col-sm-10">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <div class="row">
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <select class="form-control chosen" data-placeholder="请选择" formControlName="prov">
-                                    <option value="">请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <select class="form-control chosen" data-placeholder="请选择" formControlName="city">
-                                    <option value="">请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <select class="form-control chosen" data-placeholder="请选择" formControlName="dist" >
-                                    <option value="">请选择</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" name="name" class="form-control" value="" title="" formControlName="street" />
-                    </div>
+                <input name="userName" class="form-control" formControlName="userName" required minlength="4" placeholder="请输入用户名">
+                <div *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+                    <div *ngIf="userName.errors.required">必填项不能为空！</div>
+                    <div *ngIf="userName.errors.minlength">字符必须大于等于4位</div>
                 </div>
             </div>
         </div>
 
-        <div formArrayName="aliases">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">附加信息</label>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                	<button type="button" class="btn btn-default" (click)="addAlias()">添加</button>
-                </div>
-            </div>
-            <div class="form-group" *ngFor="let n of aliases.controls; let i = index">
-                <label class="col-sm-2 control-label">附加信息{{i}}</label>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                    <input type="text" class="form-control" placeholder="请输入" [formControlName]="i" >
-                </div>
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
-                <button type="submit" class="btn btn-primary" [disabled]="!myform.valid">提交</button>
+                <button type="submit" class="btn btn-primary">提交</button>
                 <button type="button" class="btn btn-default ml-40">取消</button>
             </div>
         </div>
