@@ -14,7 +14,6 @@ import { DetailComponent } from './detail/detail.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenNameDirective } from './shared/forbidden-name.directive';
-import { ForbiddenNamesDirective } from './shared/forbidden-names.directive';
 
 @NgModule({
     declarations: [
@@ -26,8 +25,7 @@ import { ForbiddenNamesDirective } from './shared/forbidden-names.directive';
         DetailComponent,
         UserComponent,
         LoginComponent,
-        ForbiddenNameDirective,
-        ForbiddenNamesDirective
+        ForbiddenNameDirective
     ],
     imports: [
         BrowserModule,

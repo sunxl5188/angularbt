@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
+import {emailValidator} from '../shared/forbidden-name.directive';
 
 @Component({
     selector: 'app-form',
@@ -20,12 +21,15 @@ export class FormComponent implements OnInit {
     ngOnInit() {
         this.myForm = new FormGroup({
             userName: new FormControl(this.formData.userName, [
-                Validators.required,
-                Validators.minLength(4)
+                    Validators.required,
+                    emailValidator()
                 ]
             )
         });
     }
-    get userName() { return this.myForm.get('userName'); }
+
+    get userName() {
+        return this.myForm.get('userName');
+    }
 }
 
