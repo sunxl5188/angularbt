@@ -9,18 +9,26 @@ export class ForbiddenNameDirective {
     }
 }
 
+const regexp = {
+    alpha: {rules: /^[A-Z]*$/i, messages: '只能包含字母字符'},
+    alpha_dash: {rules: /^[0-9A-Z_-]*$/i, messages: '能够包含字母数字字符、破折号和下划线'},
+    alpha_num: {rules: /^[0-9A-Z]*$/i, messages: '只能包含字母数字字符'},
+    alpha_spaces: {rules: /^[A-Z\s]*$/i, messages: '只能包含字母字符和空格'},
+    mobile: {rules: /^1[3-9]\d{9}$/, messages: '格式不正确'},
+    email: {rules: /^\w+@[a-z0-9]+\.[a-z]+$/i, messages: '格式不正确'},
+};
+
+export function regexValidator(name, n = '', tipsy = ''): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+        const result = regexp[name]['rules'].test(control.value);
+        return result ? null : {regex: {error: tipsy || n + regexp[name]['messages']}};
+    };
+}
+
 export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
         const forbidden = nameRe.test(control.value);
         return forbidden ? {forbiddenName: {value: control.value}} : null;
-    };
-}
-
-// 验证手机号
-export function mobileValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const isMobile = /^1[3456789]\d{9}$/.test(control.value);
-        return isMobile ? null : {mobile: {error: '请输入正确的手机号!'}};
     };
 }
 
@@ -32,30 +40,3 @@ export function idCardValidator(): ValidatorFn {
     };
 }
 
-// 验证邮箱地址
-export function emailValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const isEmail = /^\w+@[a-z0-9]+\.[a-z]+$/.test(control.value);
-        return isEmail ? null : {email: {error: '请输入正确的邮箱地址!'}};
-    };
-}
-
-// 正则表达式验证
-export function validateValidator(nameType): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let isTrue;
-        let reg;
-        switch (nameType) {
-            case 'alpha':
-                reg = /^[A-Z]*$/i;
-                break;
-        }
-        isTrue = reg.test(control.value);
-        return isTrue ? null : {};
-    };
-}
-
-// 验证字符只能包含字母
-// 验证字符只能包含字母,数字，短划线或下划线
-// 验证字段可能包含字母字符或数字
-// 验证字段可能包含字母字符或空格

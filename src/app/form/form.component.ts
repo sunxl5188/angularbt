@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
-import {emailValidator} from '../shared/forbidden-name.directive';
+import {regexValidator} from '../shared/forbidden-name.directive';
 
 @Component({
     selector: 'app-form',
@@ -22,7 +22,7 @@ export class FormComponent implements OnInit {
         this.myForm = new FormGroup({
             userName: new FormControl(this.formData.userName, [
                     Validators.required,
-                    emailValidator()
+                    regexValidator('mobile', '手机号')
                 ]
             )
         });

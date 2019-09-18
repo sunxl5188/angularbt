@@ -6,7 +6,7 @@
                 <input name="userName" class="form-control" formControlName="userName" required placeholder="请输入用户名">
                 <div *ngIf="userName.invalid && (userName.dirty || userName.touched)">
                     <div *ngIf="userName.errors.required">必填项不能为空！</div>
-                    <div *ngIf="userName.errors.email">{{userName.errors.email.error}}</div>
+                    <div *ngIf="!userName.errors.required && userName.errors.regex">{{userName.errors.regex.error}}</div>
                 </div>
             </div>
         </div>
