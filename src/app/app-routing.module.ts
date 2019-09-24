@@ -12,6 +12,7 @@ import {DetailComponent} from './detail/detail.component';
 import {FormComponent} from './form/form.component';
 import {UserComponent} from './user/user.component';
 import {LoginComponent} from './login/login.component';
+import {CityComponent} from './common/city/city.component';
 import {ErrorComponent} from './error/error.component';
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
         }
     },
     {path: 'login', component: LoginComponent},
+    {path: 'city', component: CityComponent},
     {path: '', component: HomeComponent, pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
 ];

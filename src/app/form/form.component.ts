@@ -31,5 +31,9 @@ export class FormComponent implements OnInit {
     get userName() {
         return this.myForm.get('userName');
     }
+
+    handelEvent(data) {
+        console.log(data);
+    }
 }
 

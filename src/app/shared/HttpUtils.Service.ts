@@ -18,14 +18,15 @@ const headers = new HttpHeaders({
 @Injectable({
     providedIn: 'root'
 })
+
 export class HttpUtilsService {
     baseUrl = 'http://www.js.me/demo/data.php';
 
     constructor(
         private http: HttpClient
     ) {
+        console.log(this + '-----------');
     }
-
     /**
      * GET请求
      * @param url 请求地址

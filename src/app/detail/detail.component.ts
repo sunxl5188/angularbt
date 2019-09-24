@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {Config, HttpUtilsService} from '../HttpUtils.Service';
+import {Config, HttpUtilsService} from '../shared/HttpUtils.Service';
 
 
 @Component({
