@@ -12,7 +12,8 @@ export interface Config {
 const headers = new HttpHeaders({
     // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     'Content-Type': 'application/json;charset=UTF-8',
-    'X-CustomToken': 'value+'
+    'X-CustomToken': 'value+',
+    'X-XSRF-TOKEN': 'ToKenValue--'
 });
 
 @Injectable({
@@ -20,39 +21,55 @@ const headers = new HttpHeaders({
 })
 
 export class HttpUtilsService {
+    // 定义请求域名
     baseUrl = 'http://www.js.me/demo/data.php';
 
-    constructor(
-        private http: HttpClient
+     constructor(
+        private $http: HttpClient,
     ) {
-        console.log(this + '-----------');
     }
     /**
      * GET请求
-     * @param url 请求地址
-     * @param id 只接收参数ID
+     * @param-url
+     * @param-data
      */
-    public get(url: string, id: string): Observable<Config> {
-        const params = new HttpParams()
-            .set('id', id);
-        return this.http.get<Config>(
-            this.baseUrl + url, {headers, params}
+    public get(url: string, data: {}): Observable<{}> {
+        const params = new HttpParams({
+            fromObject: data
+        });
+        return this.$http.get<{}>(this.baseUrl + url, {headers, params}
         ).pipe(
             retry(3), // 最多重试3次失败的请求
             catchError(this.handleError) // 然后处理错误
         );
     }
-
-    public post(url, params): Observable<any> {
-        return this.http.post(this.baseUrl + url, params, {headers})
+    /**
+     * POST请求
+     * @param-url
+     * @param-params
+     */
+    public post(url, params): Observable<{}> {
+        return this.$http.post<{}>(this.baseUrl + url, params, {headers})
             .pipe(
+                retry(3),
+                catchError(this.handleError)
+            );
+    }
+    /**
+     * 本地JSON请求
+     * @param-url
+     */
+    public getJSON(url): Observable<{}> {
+        return this.$http.get(url, {headers})
+            .pipe(
+                retry(3),
                 catchError(this.handleError)
             );
     }
 
     /**
-     * handleError 错误信息处理
-     * param error
+     * 获取错误详情
+     * @param-error
      */
     private handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {

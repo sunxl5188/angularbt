@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {Config, HttpUtilsService} from '../shared/HttpUtils.Service';
+import {HttpUtilsService} from '../shared/HttpUtils.Service';
 
 
 @Component({
@@ -14,8 +14,8 @@ import {Config, HttpUtilsService} from '../shared/HttpUtils.Service';
 export class DetailComponent implements OnInit {
     id = null;
     headers: string;
-    config: Config;
     error: any;
+    details: object;
 
     constructor(
         private http: HttpUtilsService,
@@ -27,25 +27,18 @@ export class DetailComponent implements OnInit {
 
     ngOnInit() {
         this.id = this.router.snapshot.queryParams['id'];
-
     }
 
     showGet() {
-        this.http.get('?action=all', this.id)
+        this.http.get('?action=all', { id: this.id, fid: '23344' })
             .subscribe(
-                (data: Config) => this.config = {...data}, // success path
+                (data) => this.details = data, // success path
                 error => this.error = error // error path
             );
     }
-
-    showPost() {
-        this.http.post('?action=all', {
-            title: '111',
-            content: '23ewrwr',
-            type: 2,
-            name: 'myform'
-        }).subscribe(
-            (data) => this.config = {...data},
+    getJson() {
+        this.http.getJSON('/assets/json/city.json').subscribe(
+            (data) => console.log(data),
             error => this.error = error
         );
     }
