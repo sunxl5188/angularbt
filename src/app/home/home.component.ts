@@ -9,45 +9,45 @@
  * 7、ngAfterViewChecked - 组件每次检查视图时调用
  * 8、ngOnDestroy - 指令销毁前调用
  */
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 declare let Swiper: any;
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-    testSwiper = null;
-    slides = [
-        'https://via.placeholder.com/300x200/FF5733/ffffff',
-        'https://via.placeholder.com/300x200/C70039/ffffff',
-        'https://via.placeholder.com/300x200/900C3F/ffffff'
-    ];
+  testSwiper = null;
+  slides = [
+    'https://via.placeholder.com/300x200/FF5733/ffffff',
+    'https://via.placeholder.com/300x200/C70039/ffffff',
+    'https://via.placeholder.com/300x200/900C3F/ffffff'
+  ];
 
-    constructor() {}
+  constructor() {}
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    ngAfterViewInit() {
-        this.testSwiper = new Swiper('.swiper-container', {
-            direction: 'horizontal',
-            loop: true,
-            // 如果需要分页器
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            // 如果需要前进后退按钮
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            // 如果需要滚动条
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-        });
-    }
+  ngAfterViewInit() {
+    this.testSwiper = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      loop: true,
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination'
+      },
+      // 如果需要前进后退按钮
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      // 如果需要滚动条
+      scrollbar: {
+        el: '.swiper-scrollbar'
+      }
+    });
+  }
 }
