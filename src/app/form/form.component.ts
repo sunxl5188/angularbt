@@ -1,39 +1,39 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
-import {regexValidator} from '../shared/forbidden-name.directive';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
+import { regexValidator } from '../shared/forbidden-name.directive';
 
 @Component({
-    selector: 'app-form',
-    templateUrl: './form.component.html',
-    styleUrls: ['./form.component.scss']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-    constructor() {
-    }
+  constructor() {
+  }
 
-    formData = {
-        userName: '',
-        password: ''
-    };
+  formData = {
+    userName: '',
+    password: ''
+  };
 
-    myForm: FormGroup;
+  myForm: FormGroup;
 
-    ngOnInit() {
-        this.myForm = new FormGroup({
-            userName: new FormControl(this.formData.userName, [
-                    Validators.required,
-                    regexValidator('mobile', '手机号')
-                ]
-            )
-        });
-    }
+  ngOnInit() {
+    this.myForm = new FormGroup({
+      userName: new FormControl(this.formData.userName, [
+          Validators.required,
+          regexValidator('mobile', '手机号')
+        ]
+      )
+    });
+  }
 
-    get userName() {
-        return this.myForm.get('userName');
-    }
+  get userName() {
+    return this.myForm.get('userName');
+  }
 
-    handelEvent(data) {
-        console.log(data);
-    }
+  handelEvent(data) {
+    console.log(data);
+  }
 }
 
